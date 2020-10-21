@@ -1,4 +1,4 @@
-# traefik-datadog-event
+# Traefik Datadog Event
 
 This plugin can be used to generate Datadog events if certain patterns match.
 
