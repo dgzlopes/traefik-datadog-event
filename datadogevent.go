@@ -13,11 +13,11 @@ const endpoint = "https://api.datadoghq.com/api/v1/events?api_key="
 
 // Config the plugin configuration.
 type Config struct {
-	APIKey   string
-	Code     int
-	Title    string
-	Message  string
-	Priority string
+	APIKey   string `yaml:"APIKey"`
+	Code     int    `yaml:"Code"`
+	Title    string `yaml:"Title"`
+	Message  string `yaml:"Message"`
+	Priority string `yaml:"Priority"`
 }
 
 // CreateConfig creates the default plugin configuration.
