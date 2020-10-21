@@ -1,8 +1,8 @@
-# traefik-datadog-event
+# Traefik Datadog Event
 
 This plugin can be used to generate Datadog events if certain patterns match.
 
-### Plugin options
+## Plugin options
 
 **APIKey**
 
@@ -10,13 +10,13 @@ This plugin can be used to generate Datadog events if certain patterns match.
 
 Your Datadog API key.
 
-#### Patterns
+### Patterns
 
 **Code**
 
 This pattern compares the user defined status code, with the response code.
 
-#### Event options
+### Event options
 
 **Title**
 
