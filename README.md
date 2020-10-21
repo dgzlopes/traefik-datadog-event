@@ -1,2 +1,2 @@
-# traefik-notification
- Traefik Middleware Plugin - Notifications with pattern matching
+# traefik-datadog-event
+ Traefik Middleware Plugin - Create Datadog events from patterns 
