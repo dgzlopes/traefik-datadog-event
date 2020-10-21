@@ -55,6 +55,8 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 
 func (a *DatadogEvent) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	recorder := httptest.NewRecorder()
+	a.next.ServeHTTP(recorder, req)
+	_, _ = rw.Write(recorder.Body.Bytes())
 
 	if recorder.Code == a.Code {
 		req, err := http.NewRequest("POST", endpoint+a.APIKey, generateEventPayload(a))
@@ -69,8 +71,6 @@ func (a *DatadogEvent) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 			log.Printf("traefik-datadog-event: event request denied %w", err)
 		}
 	}
-
-	a.next.ServeHTTP(recorder, req)
 }
 
 func generateEventPayload(a *DatadogEvent) *bytes.Buffer {
