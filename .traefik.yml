@@ -1,0 +1,13 @@
+displayName: Datadog event
+type: middleware
+
+import: github.com/dgzlopes/traefik-datadog-event
+
+summary:  Create Datadog events from patterns 
+
+testData:
+  APIKey: <your-datadog-api-key>
+  Code: 404
+  Message: "Buy cheese and bread for breakfast."
+  Title: "Oh boy!"
+  Priority: "normal"
