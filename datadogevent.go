@@ -61,14 +61,14 @@ func (a *DatadogEvent) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if recorder.Code == a.Code {
 		req, err := http.NewRequest("POST", endpoint+a.APIKey, generateEventPayload(a))
 		if err != nil {
-			log.Printf("traefik-datadog-event: failed to create NewRequest %w", err)
+			log.Fatal("traefik-datadog-event: failed to create NewRequest %w", err)
 		}
 		req.Header.Set("Content-Type", "application/json")
 
 		httpClient := &http.Client{}
 		_, ok := httpClient.Do(req)
 		if ok != nil {
-			log.Printf("traefik-datadog-event: event request denied %w", err)
+			log.Fatal("traefik-datadog-event: event request denied %w", err)
 		}
 	}
 }
