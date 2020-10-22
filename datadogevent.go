@@ -4,6 +4,7 @@ package traefik_datadog_event
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -42,6 +43,9 @@ type DatadogEvent struct {
 
 // New created a new plugin
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
+	if config.APIKey == "" {
+		return nil, fmt.Errorf("traefik-datadog-event: you need to specity your Datadog APIKey")
+	}
 	return &DatadogEvent{
 		APIKey:   config.APIKey,
 		Code:     config.Code,
