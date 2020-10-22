@@ -16,7 +16,7 @@ const endpoint = "https://api.datadoghq.com/api/v1/events?api_key="
 // Config the plugin configuration.
 type Config struct {
 	APIKey      string `yaml:"APIKey"`
-	Code        int    `yaml:"Code"`
+	CodePattern int    `yaml:"CodePattern"`
 	BodyPattern string `yaml:"BodyPattern"`
 	Title       string `yaml:"Title"`
 	Message     string `yaml:"Message"`
@@ -26,10 +26,10 @@ type Config struct {
 // CreateConfig creates the default plugin configuration.
 func CreateConfig() *Config {
 	return &Config{
-		Code:     -1,
-		Title:    "Default error",
-		Message:  "Default error",
-		Priority: "normal",
+		CodePattern: -1,
+		Title:       "Default error",
+		Message:     "Default error",
+		Priority:    "normal",
 	}
 }
 
@@ -37,7 +37,7 @@ func CreateConfig() *Config {
 type DatadogEvent struct {
 	next        http.Handler
 	APIKey      string
-	Code        int
+	CodePattern int
 	BodyPattern string
 	Title       string
 	Message     string
@@ -52,7 +52,7 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 	}
 	return &DatadogEvent{
 		APIKey:      config.APIKey,
-		Code:        config.Code,
+		CodePattern: config.CodePattern,
 		BodyPattern: config.BodyPattern,
 		Title:       config.Title,
 		Message:     config.Message,
@@ -67,7 +67,7 @@ func (a *DatadogEvent) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	a.next.ServeHTTP(recorder, req)
 	_, _ = rw.Write(recorder.Body.Bytes())
 
-	if recorder.Code == a.Code {
+	if recorder.Code == a.CodePattern {
 		if a.BodyPattern != "" {
 			if CheckPattern(a.BodyPattern, recorder.Body.String()) {
 				SendEvent(a)
@@ -77,7 +77,7 @@ func (a *DatadogEvent) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		}
 
 	} else {
-		if a.BodyPattern != "" && a.Code == -1 {
+		if a.BodyPattern != "" && a.CodePattern == -1 {
 			fmt.Println("hwllo")
 			if CheckPattern(a.BodyPattern, recorder.Body.String()) {
 				SendEvent(a)

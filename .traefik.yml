@@ -7,7 +7,7 @@ summary:  Create Datadog events from patterns
 
 testData:
   APIKey: <your-datadog-api-key>
-  Code: 404
+  CodePattern: 404
   BodyPattern: "[a-z]+"
   Message: "Buy cheese and bread for breakfast."
   Title: "Oh boy!"

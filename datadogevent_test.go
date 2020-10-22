@@ -10,7 +10,7 @@ import (
 func TestServeHTTPp(t *testing.T) {
 	tests := []struct {
 		desc          string
-		code          int
+		codePattern   int
 		bodyPattern   string
 		title         string
 		message       string
@@ -20,7 +20,7 @@ func TestServeHTTPp(t *testing.T) {
 	}{
 		{
 			desc:          "generate event payload",
-			code:          400,
+			codePattern:   400,
 			bodyPattern:   "[a-z]+",
 			title:         "test",
 			message:       "test",
@@ -29,7 +29,7 @@ func TestServeHTTPp(t *testing.T) {
 			expStatusCode: http.StatusOK,
 		}, {
 			desc:          "generate event payload",
-			code:          100,
+			codePattern:   100,
 			bodyPattern:   "[a-z]+",
 			title:         "Something bad happened!",
 			message:       "We need help **here**",
@@ -44,7 +44,7 @@ func TestServeHTTPp(t *testing.T) {
 			next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 
 			cfg := &DatadogEvent{
-				Code:        test.code,
+				CodePattern: test.codePattern,
 				BodyPattern: test.bodyPattern,
 				Title:       test.title,
 				Message:     test.message,

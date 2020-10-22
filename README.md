@@ -25,13 +25,15 @@ Your Datadog API key.
 
 ### Patterns
 
-**Code**
+**CodePattern**
 
-This pattern compares the user defined status code, with the response code.
+This pattern compares the user-defined status code, with the response code.
 
 **BodyPattern**
 
-This pattern checks if the user defined regex, matches with the reponse body.
+This pattern checks if the user-defined regex matches the response body.
+
+> If you specify multiple patterns (e.g Code and Body) the plugin will generate a new event only if all of them match.
 
 ### Event options
 
@@ -47,10 +49,10 @@ The body of the event. Limited to 4000 characters. The text supports markdown.
 
 *Default: normal*
 
-The priority of the event. For example, normal or low. Allowed enum values: normal,low
+The priority of the event. For example, normal or low. Allowed enum values: normal, low
 
 ## How to contribute
 1. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
 2. Fork [the repository](https://github.com/dgzlopes/traefik-datadog-event) on GitHub to start making your changes to the master branch (or branch off of it).
-3. Write a test which shows that the bug was fixed or that the feature works as expected.
+3. Write a test that shows that the bug was fixed or that the feature works as expected.
 4. Send a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork) and bug [me](https://github.com/dgzlopes) until it gets merged and published.
