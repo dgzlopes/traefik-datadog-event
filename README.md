@@ -29,6 +29,10 @@ Your Datadog API key.
 
 This pattern compares the user defined status code, with the response code.
 
+**BodyPattern**
+
+This pattern checks if the user defined regex, matches with the reponse body.
+
 ### Event options
 
 **Title**
